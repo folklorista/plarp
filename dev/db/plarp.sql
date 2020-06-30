@@ -41,7 +41,7 @@ CREATE SCHEMA IF NOT EXISTS organizing;
 -- Create types
 -- TYP TEXT se nevytvari
 
-CREATE TYPE application.admin_level AS ENUM ('admin','editor','autor');
+CREATE TYPE application.admin_level AS ENUM ('admin','editor','author');
 
 -- Create tables
 CREATE TABLE IF NOT EXISTS application.user
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS application.user
     surname VARCHAR(255),
     username VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    admin_level application.admin_level,
+    admin_level application.admin_level DEFAULT 'author' NOT NULL,
     created_at timestamp without time zone DEFAULT timezone('cet'::text, now()),
     updated_at timestamp without time zone,
     PRIMARY KEY(ID)
@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS game.involvement
 (
     ID SERIAL,
     id_tail INTEGER,
-    id_character TEXT,
+    id_character INTEGER,
     description TEXT,
     sandbox TEXT,
     org_note TEXT,
@@ -181,7 +181,6 @@ CREATE TABLE IF NOT EXISTS game.event
 CREATE TABLE IF NOT EXISTS game.prop
 (
     ID SERIAL,
-    id_character INTEGER,
     name VARCHAR(255) NOT NULL UNIQUE,
     description TEXT,
     id_user INTEGER,
@@ -378,14 +377,6 @@ ALTER TABLE game.acquaintance
     MATCH SIMPLE
 ;
 
-ALTER TABLE game.prop
-    DROP CONSTRAINT IF EXISTS "prop_id_character_fkey",
-    ADD CONSTRAINT "prop_id_character_fkey"
-    FOREIGN KEY (id_character)
-    REFERENCES game.character(ID)
-    MATCH SIMPLE
-;
-
 ALTER TABLE organizing.tail_x_task
     DROP CONSTRAINT IF EXISTS "tail_x_task_id_tail_fkey",
     ADD CONSTRAINT "tail_x_task_id_tail_fkey"
@@ -515,18 +506,18 @@ ALTER TABLE organizing.event_x_task
 ;
 
 ALTER TABLE game.participation
-    DROP CONSTRAINT IF EXISTS "participation_ID_fkey",
-    ADD CONSTRAINT "participation_ID_fkey"
-    FOREIGN KEY (ID)
-    REFERENCES game.event(ID)
-    MATCH SIMPLE
-;
-
-ALTER TABLE game.participation
     DROP CONSTRAINT IF EXISTS "participation_id_character_fkey",
     ADD CONSTRAINT "participation_id_character_fkey"
     FOREIGN KEY (id_character)
     REFERENCES game.character(ID)
+    MATCH SIMPLE
+;
+
+ALTER TABLE game.participation
+    DROP CONSTRAINT IF EXISTS "participation_id_event_fkey",
+    ADD CONSTRAINT "participation_id_event_fkey"
+    FOREIGN KEY (id_event)
+    REFERENCES game.event(ID)
     MATCH SIMPLE
 ;
 

@@ -2,15 +2,74 @@
 
 This is a list of bash commands, executed in order to create the project:
 
+## Initialize all projects
+
+Initialize git versioning
+
 ```bash
+/var/www/plarp/
 git init
 ```
+
+Initialize new Angular project 
 
 ```bash
 ng new plarp
 ```
 
+Initialize new Loopback4 project
+
 ```bash
 npm i -g @loopback/cli
-lb4 app --applicationName plarp --description 'supportive tool for LARP organisers' --outdir api3 --yes plarp
+lb4 app --applicationName plarp --description 'supportive tool for LARP organisers' --outdir api --yes plarp
+```
+
+## API: Add datasource
+
+```bash
+cd /var/www/plarp/api
+npm install loopback-connector-postgresql --save
+```
+
+```bash
+lb4 datasource --connector postgresql --config stdin << EOF
+{
+  "name": "development",
+  "url": "",
+  "host": "localhost",
+  "port": 5432,
+  "user": "plarp",
+  "password": "plarp",
+  "database": "plarp"
+}
+EOF
+```
+
+Build it to transpile new datasource
+
+```bash
+npm run build
+```
+
+## DB: create postgres users & database
+
+```shell
+sudo su postgres
+```
+
+This command will ask for password
+
+```shell
+createuser plarp --no-createdb --pwprompt --no-superuser --no-createrole
+```
+
+This command will ask for password
+
+```shell
+createuser plarp_ddl --no-createdb --pwprompt --no-superuser --no-createrole
+```
+
+```shell
+/var/www/plarp/api/dev/scripts/recreate_db.sh plarp development
+exit
 ```
