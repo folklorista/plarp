@@ -73,3 +73,35 @@ createuser plarp_ddl --no-createdb --pwprompt --no-superuser --no-createrole
 /var/www/plarp/api/dev/scripts/recreate_db.sh plarp development
 exit
 ```
+
+## API: Discover models
+
+```bash
+cd /var/www/plarp/api
+```
+
+This commands will ask for database column naming convention. Select default option (camelCase).
+
+```bash
+lb4 discover --dataSource 'development' --views false --all --outDir 'src/models/application' --schema 'application'
+```
+
+This commands will ask for database column naming convention. Select default option (camelCase).
+
+```bash
+lb4 discover --dataSource 'development' --views false --all --outDir 'src/models/game' --schema 'game'
+```
+
+This commands will ask for database column naming convention. Select default option (camelCase).
+
+```bash
+lb4 discover --dataSource 'development' --views false --all --outDir 'src/models/organizing' --schema 'organizing'
+```
+
+This commands will ask for database column naming convention. Select default option (camelCase).
+
+```bash
+lb4 discover --dataSource 'development' --views false --all --outDir 'src/models/player' --schema 'player'
+```
+
+After all, regenerate barrel file `api/src/models/index.ts`!
