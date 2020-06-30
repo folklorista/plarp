@@ -1,0 +1,898 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>EVO DB</title>
+  <meta name="description" content="Dokumentace datab&aacute;zov&eacute; struktury">
+  <meta name="author" content="EVO documenter">
+
+  <link rel="stylesheet" href="style.css?v=1.0">
+</head>
+
+<body>
+<div id="body">
+
+<h1>Sch&eacute;mata</h1>
+<table>
+<thead>
+  <th>n&aacute;zev</th>
+  <th>popis</th>
+</thead>
+<tbody>
+  <tr tabindex="1" id="game" class="">
+    <th class="group-name label">game</th>
+    <td></td>
+  </tr>
+  
+  <tr tabindex="1" id="application" class="">
+    <th class="group-name label">application</th>
+    <td></td>
+  </tr>
+  
+  <tr tabindex="1" id="organizing" class="">
+    <th class="group-name label">organizing</th>
+    <td></td>
+  </tr>
+  
+  <tr tabindex="1" id="player" class="">
+    <th class="group-name label">player</th>
+    <td></td>
+  </tr>
+  
+</tbody>
+</table>
+
+<h1>Datov&eacute; typy</h1>
+<table>
+<thead>
+  <th>n&aacute;zev</th>
+  <th>popis</th>
+  <th>hodnoty</th>
+</thead>
+<tbody>
+  <tr tabindex="1" id="application.admin_level" class="">
+    <th class="type-name label">admin_level</th>
+    <td><ul>
+  	<li><em>admin</em>: full access</li>
+  	<li><em>editor</em>: can view all, cannot edit public data, cannot delete</li>
+  	<li><em>author</em>: can view&amp;edit its contributions</li>
+  </ul>
+  </td>
+    <td><ul class="type-values"><li>'admin'</li><li>'editor'</li><li>'autor'</li></ul>
+    </td>
+  </tr>
+  <tr tabindex="1" id="TEXT" class="cannotCreate">
+    <th class="type-name label">TEXT</th>
+    <td><p>syst&eacute;mov&yacute; typ (nevytv&aacute;ř&iacute; se)</p>
+  </td>
+    <td>
+    </td>
+  </tr>
+</tbody>
+</table>
+
+<h1>Tabulky</h1>
+<table>
+<thead>
+  <th>n&aacute;zev</th>
+  <th>popis</th>
+  <th>sloupce</th>
+</thead>
+<tbody>
+  <tr tabindex="1"  id="game.character" class="">
+    <th class="table-name label">character<br /><small><a href="#game">game</a></small></th>
+    <td class="description"><p>game charater</p>
+  </td>
+    <td>
+      <table class="columns">
+      <tbody>
+        <tr><th class="column-name">ID
+        </th>
+        <td class="column-type serial">
+          
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name">name
+        </th>
+        <td class="column-type unique">
+          VARCHAR(255)
+        </td>
+        <td><p>ingame character name</p>
+        </td></tr>
+        <tr><th class="column-name">description
+        </th>
+        <td class="column-type null">
+          TEXT
+        </td>
+        <td><p>character description visible for its player</p>
+        </td></tr>
+        <tr><th class="column-name">sandbox
+        </th>
+        <td class="column-type null">
+          TEXT
+        </td>
+        <td><p>gamemaster&#39;s playground</p>
+        </td></tr>
+        <tr><th class="column-name">org_note
+        </th>
+        <td class="column-type null">
+          TEXT
+        </td>
+        <td><p>gamemaster&#39;s notes</p>
+        </td></tr>
+        <tr><th class="column-name">summary_short
+        </th>
+        <td class="column-type null">
+          TEXT
+        </td>
+        <td><p>public character description (brief overview for lists)</p>
+        </td></tr>
+        <tr><th class="column-name">summary_long
+        </th>
+        <td class="column-type null">
+          TEXT
+        </td>
+        <td><p>public character description (detail)</p>
+        </td></tr>
+        <tr><th class="column-name">equipment
+        </th>
+        <td class="column-type null">
+          TEXT
+        </td>
+        <td><p>character equipment</p>
+        </td></tr>
+        <tr><th class="column-name"><a href="#application.user" alt="application.user">id_user</a>
+        </th>
+        <td class="column-type null">
+          INTEGER
+        </td>
+        <td><p>autor of the item</p>
+        </td></tr>
+      </tbody>
+      </table>
+  </tr>
+  <tr tabindex="1"  id="game.character_x_prop" class="">
+    <th class="table-name label">character_x_prop<br /><small><a href="#game">game</a></small></th>
+    <td class="description"></td>
+    <td>
+      <table class="columns">
+      <tbody>
+        <tr><th class="column-name">ID
+        </th>
+        <td class="column-type serial">
+          
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name"><a href="#game.character" alt="game.character">id_character</a>
+        </th>
+        <td class="column-type null">
+          INTEGER
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name"><a href="#game.prop" alt="game.prop">id_prop</a>
+        </th>
+        <td class="column-type null">
+          INTEGER
+        </td>
+        <td></td></tr>
+      </tbody>
+      </table>
+  </tr>
+  <tr tabindex="1"  id="organizing.character_x_task" class="">
+    <th class="table-name label">character_x_task<br /><small><a href="#organizing">organizing</a></small></th>
+    <td class="description"></td>
+    <td>
+      <table class="columns">
+      <tbody>
+        <tr><th class="column-name">ID
+        </th>
+        <td class="column-type serial">
+          
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name"><a href="#game.character" alt="game.character">id_character</a>
+        </th>
+        <td class="column-type null">
+          INTEGER
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name"><a href="#organizing.task" alt="organizing.task">id_task</a>
+        </th>
+        <td class="column-type null">
+          INTEGER
+        </td>
+        <td></td></tr>
+      </tbody>
+      </table>
+  </tr>
+  <tr tabindex="1"  id="game.event" class="">
+    <th class="table-name label">event<br /><small><a href="#game">game</a></small></th>
+    <td class="description"><p>timed game event</p>
+  </td>
+    <td>
+      <table class="columns">
+      <tbody>
+        <tr><th class="column-name">ID
+        </th>
+        <td class="column-type serial">
+          
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name">name
+        </th>
+        <td class="column-type unique">
+          VARCHAR(255)
+        </td>
+        <td><p>event name</p>
+        </td></tr>
+        <tr><th class="column-name">description
+        </th>
+        <td class="column-type null">
+          TEXT
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name">sandbox
+        </th>
+        <td class="column-type null">
+          TEXT
+        </td>
+        <td><p>gamemaster&#39;s playground</p>
+        </td></tr>
+        <tr><th class="column-name">org_note
+        </th>
+        <td class="column-type null">
+          TEXT
+        </td>
+        <td><p>gamemaster&#39;s notes</p>
+        </td></tr>
+        <tr><th class="column-name">game_time
+        </th>
+        <td class="column-type null">
+          VARCHAR(255)
+        </td>
+        <td><p>timestamp for sorting purposes</p>
+        </td></tr>
+      </tbody>
+      </table>
+  </tr>
+  <tr tabindex="1"  id="organizing.event_x_task" class="">
+    <th class="table-name label">event_x_task<br /><small><a href="#organizing">organizing</a></small></th>
+    <td class="description"></td>
+    <td>
+      <table class="columns">
+      <tbody>
+        <tr><th class="column-name">ID
+        </th>
+        <td class="column-type serial">
+          
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name"><a href="#game.event" alt="game.event">id_event</a>
+        </th>
+        <td class="column-type null">
+          INTEGER
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name"><a href="#organizing.task" alt="organizing.task">id_task</a>
+        </th>
+        <td class="column-type null">
+          INTEGER
+        </td>
+        <td></td></tr>
+      </tbody>
+      </table>
+  </tr>
+  <tr tabindex="1"  id="game.involvement" class="">
+    <th class="table-name label">involvement<br /><small><a href="#game">game</a></small></th>
+    <td class="description"><p>involving the character in the story</p>
+  </td>
+    <td>
+      <table class="columns">
+      <tbody>
+        <tr><th class="column-name">ID
+        </th>
+        <td class="column-type serial">
+          
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name"><a href="#game.tail" alt="game.tail">id_tail</a>
+        </th>
+        <td class="column-type null">
+          INTEGER
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name"><a href="#game.character" alt="game.character">id_character</a>
+        </th>
+        <td class="column-type null">
+          TEXT
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name">description
+        </th>
+        <td class="column-type null">
+          TEXT
+        </td>
+        <td><p>story description visible for character&#39;s&nbsp;player</p>
+        </td></tr>
+        <tr><th class="column-name">sandbox
+        </th>
+        <td class="column-type null">
+          TEXT
+        </td>
+        <td><p>gamemaster&#39;s playground</p>
+        </td></tr>
+        <tr><th class="column-name">org_note
+        </th>
+        <td class="column-type null">
+          TEXT
+        </td>
+        <td><p>gamemaster&#39;s notes</p>
+        </td></tr>
+      </tbody>
+      </table>
+  </tr>
+  <tr tabindex="1"  id="game.acquaintance" class="">
+    <th class="table-name label">acquaintance<br /><small><a href="#game">game</a></small></th>
+    <td class="description"><p>relation between characters</p>
+  </td>
+    <td>
+      <table class="columns">
+      <tbody>
+        <tr><th class="column-name">ID
+        </th>
+        <td class="column-type serial">
+          
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name"><a href="#game.character" alt="game.character">id_character</a>
+        </th>
+        <td class="column-type null">
+          INTEGER
+        </td>
+        <td><p>the character who knows sth about the object</p>
+        </td></tr>
+        <tr><th class="column-name"><a href="#game.character" alt="game.character">id_object</a>
+        </th>
+        <td class="column-type null">
+          INTEGER
+        </td>
+        <td><p>the character who is known about</p>
+        </td></tr>
+        <tr><th class="column-name">description
+        </th>
+        <td class="column-type null">
+          TEXT
+        </td>
+        <td><p>object description visible for character&#39;s player</p>
+        </td></tr>
+        <tr><th class="column-name">sandbox
+        </th>
+        <td class="column-type null">
+          TEXT
+        </td>
+        <td><p>gamemaster&#39;s playground</p>
+        </td></tr>
+        <tr><th class="column-name">org_note
+        </th>
+        <td class="column-type null">
+          TEXT
+        </td>
+        <td><p>gamemaster&#39;s notes</p>
+        </td></tr>
+      </tbody>
+      </table>
+  </tr>
+  <tr tabindex="1"  id="player.player_x_quality" class="">
+    <th class="table-name label">player_x_quality<br /><small><a href="#player">player</a></small></th>
+    <td class="description"></td>
+    <td>
+      <table class="columns">
+      <tbody>
+        <tr><th class="column-name">ID
+        </th>
+        <td class="column-type serial">
+          
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name"><a href="#player.player" alt="player.player">id_player</a>
+        </th>
+        <td class="column-type null">
+          INTEGER
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name"><a href="#player.quality" alt="player.quality">id_quality</a>
+        </th>
+        <td class="column-type null">
+          INTEGER
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name">rate
+        </th>
+        <td class="column-type null">
+          INTEGER
+        </td>
+        <td></td></tr>
+      </tbody>
+      </table>
+  </tr>
+  <tr tabindex="1"  id="player.player" class="">
+    <th class="table-name label">player<br /><small><a href="#player">player</a></small></th>
+    <td class="description"><p>game player</p>
+  </td>
+    <td>
+      <table class="columns">
+      <tbody>
+        <tr><th class="column-name">ID
+        </th>
+        <td class="column-type serial">
+          
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name">first_name
+        </th>
+        <td class="column-type null">
+          VARCHAR(255)
+        </td>
+        <td><p>first name</p>
+        </td></tr>
+        <tr><th class="column-name">surname
+        </th>
+        <td class="column-type null">
+          VARCHAR(255)
+        </td>
+        <td><p>surname</p>
+        </td></tr>
+        <tr><th class="column-name">nickname
+        </th>
+        <td class="column-type null">
+          VARCHAR(255)
+        </td>
+        <td><p>nickname</p>
+        </td></tr>
+        <tr><th class="column-name">email
+        </th>
+        <td class="column-type null">
+          VARCHAR(255)
+        </td>
+        <td><p>email address</p>
+        </td></tr>
+        <tr><th class="column-name">fb
+        </th>
+        <td class="column-type null">
+          VARCHAR(255)
+        </td>
+        <td><p>facebook contact</p>
+        </td></tr>
+        <tr><th class="column-name">kids
+        </th>
+        <td class="column-type null">
+          VARCHAR(255)
+        </td>
+        <td><p>age of player&#39;s children</p>
+        </td></tr>
+        <tr><th class="column-name"><a href="#game.character" alt="game.character">id_character</a>
+        </th>
+        <td class="column-type null">
+          INTEGER
+        </td>
+        <td></td></tr>
+      </tbody>
+      </table>
+  </tr>
+  <tr tabindex="1"  id="game.prop" class="">
+    <th class="table-name label">prop<br /><small><a href="#game">game</a></small></th>
+    <td class="description"><p>game props</p>
+  </td>
+    <td>
+      <table class="columns">
+      <tbody>
+        <tr><th class="column-name">ID
+        </th>
+        <td class="column-type serial">
+          
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name"><a href="#game.character" alt="game.character">id_character</a>
+        </th>
+        <td class="column-type null">
+          INTEGER
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name">name
+        </th>
+        <td class="column-type unique">
+          VARCHAR(255)
+        </td>
+        <td><p>prop name</p>
+        </td></tr>
+        <tr><th class="column-name">description
+        </th>
+        <td class="column-type null">
+          TEXT
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name"><a href="#application.user" alt="application.user">id_user</a>
+        </th>
+        <td class="column-type null">
+          INTEGER
+        </td>
+        <td><p>autor of the item</p>
+        </td></tr>
+      </tbody>
+      </table>
+  </tr>
+  <tr tabindex="1"  id="game.participation" class="">
+    <th class="table-name label">participation<br /><small><a href="#game">game</a></small></th>
+    <td class="description"><p>participation of the the character in the game event</p>
+  </td>
+    <td>
+      <table class="columns">
+      <tbody>
+        <tr><th class="column-name"><a href="#game.event" alt="game.event">ID</a>
+        </th>
+        <td class="column-type serial">
+          
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name">id_event
+        </th>
+        <td class="column-type null">
+          INTEGER
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name"><a href="#game.character" alt="game.character">id_character</a>
+        </th>
+        <td class="column-type null">
+          INTEGER
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name">description
+        </th>
+        <td class="column-type null">
+          TEXT
+        </td>
+        <td><p>story description visible for character&#39;s&nbsp;player</p>
+        </td></tr>
+        <tr><th class="column-name">sandbox
+        </th>
+        <td class="column-type null">
+          TEXT
+        </td>
+        <td><p>gamemaster&#39;s playground</p>
+        </td></tr>
+        <tr><th class="column-name">org_note
+        </th>
+        <td class="column-type null">
+          TEXT
+        </td>
+        <td><p>gamemaster&#39;s notes</p>
+        </td></tr>
+      </tbody>
+      </table>
+  </tr>
+  <tr tabindex="1"  id="organizing.prop_x_task" class="">
+    <th class="table-name label">prop_x_task<br /><small><a href="#organizing">organizing</a></small></th>
+    <td class="description"></td>
+    <td>
+      <table class="columns">
+      <tbody>
+        <tr><th class="column-name">ID
+        </th>
+        <td class="column-type serial">
+          
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name"><a href="#game.prop" alt="game.prop">id_prop</a>
+        </th>
+        <td class="column-type null">
+          INTEGER
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name"><a href="#organizing.task" alt="organizing.task">id_task</a>
+        </th>
+        <td class="column-type null">
+          INTEGER
+        </td>
+        <td></td></tr>
+      </tbody>
+      </table>
+  </tr>
+  <tr tabindex="1"  id="player.quality" class="">
+    <th class="table-name label">quality<br /><small><a href="#player">player</a></small></th>
+    <td class="description"><p>player&#39;s attribute</p>
+  </td>
+    <td>
+      <table class="columns">
+      <tbody>
+        <tr><th class="column-name">ID
+        </th>
+        <td class="column-type serial">
+          
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name">name
+        </th>
+        <td class="column-type null">
+          VARCHAR(255)
+        </td>
+        <td><p>attribute name</p>
+        </td></tr>
+      </tbody>
+      </table>
+  </tr>
+  <tr tabindex="1"  id="organizing.acquintance_x_task" class="">
+    <th class="table-name label">acquintance_x_task<br /><small><a href="#organizing">organizing</a></small></th>
+    <td class="description"></td>
+    <td>
+      <table class="columns">
+      <tbody>
+        <tr><th class="column-name">ID
+        </th>
+        <td class="column-type serial">
+          
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name"><a href="#game.acquaintance" alt="game.acquaintance">id_acquintance</a>
+        </th>
+        <td class="column-type null">
+          INTEGER
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name"><a href="#organizing.task" alt="organizing.task">id_task</a>
+        </th>
+        <td class="column-type null">
+          INTEGER
+        </td>
+        <td></td></tr>
+      </tbody>
+      </table>
+  </tr>
+  <tr tabindex="1"  id="game.tail" class="">
+    <th class="table-name label">tail<br /><small><a href="#game">game</a></small></th>
+    <td class="description"><p>story</p>
+  </td>
+    <td>
+      <table class="columns">
+      <tbody>
+        <tr><th class="column-name">ID
+        </th>
+        <td class="column-type serial">
+          
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name">name
+        </th>
+        <td class="column-type unique">
+          VARCHAR(255)
+        </td>
+        <td><p>tail name</p>
+        </td></tr>
+        <tr><th class="column-name">description
+        </th>
+        <td class="column-type null">
+          TEXT
+        </td>
+        <td><p>story description for gamemasters</p>
+        </td></tr>
+        <tr><th class="column-name">sandbox
+        </th>
+        <td class="column-type null">
+          TEXT
+        </td>
+        <td><p>gamemaster&#39;s playground</p>
+        </td></tr>
+        <tr><th class="column-name">org_note
+        </th>
+        <td class="column-type null">
+          TEXT
+        </td>
+        <td><p>gamemaster&#39;s notes</p>
+        </td></tr>
+        <tr><th class="column-name"><a href="#application.user" alt="application.user">id_user</a>
+        </th>
+        <td class="column-type null">
+          INTEGER
+        </td>
+        <td><p>autor of the item</p>
+        </td></tr>
+      </tbody>
+      </table>
+  </tr>
+  <tr tabindex="1"  id="game.tail_x_prop" class="">
+    <th class="table-name label">tail_x_prop<br /><small><a href="#game">game</a></small></th>
+    <td class="description"></td>
+    <td>
+      <table class="columns">
+      <tbody>
+        <tr><th class="column-name">ID
+        </th>
+        <td class="column-type serial">
+          
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name"><a href="#game.tail" alt="game.tail">id_tail</a>
+        </th>
+        <td class="column-type null">
+          INTEGER
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name"><a href="#game.prop" alt="game.prop">id_prop</a>
+        </th>
+        <td class="column-type null">
+          INTEGER
+        </td>
+        <td></td></tr>
+      </tbody>
+      </table>
+  </tr>
+  <tr tabindex="1"  id="organizing.task" class="">
+    <th class="table-name label">task<br /><small><a href="#organizing">organizing</a></small></th>
+    <td class="description"></td>
+    <td>
+      <table class="columns">
+      <tbody>
+        <tr><th class="column-name">ID
+        </th>
+        <td class="column-type serial">
+          
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name"><a href="#application.user" alt="application.user">id_user</a>
+        </th>
+        <td class="column-type null">
+          INTEGER
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name">name
+        </th>
+        <td class="column-type null">
+          VARCHAR(255)
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name">description
+        </th>
+        <td class="column-type null">
+          TEXT
+        </td>
+        <td></td></tr>
+      </tbody>
+      </table>
+  </tr>
+  <tr tabindex="1"  id="organizing.tail_x_task" class="">
+    <th class="table-name label">tail_x_task<br /><small><a href="#organizing">organizing</a></small></th>
+    <td class="description"></td>
+    <td>
+      <table class="columns">
+      <tbody>
+        <tr><th class="column-name">ID
+        </th>
+        <td class="column-type serial">
+          
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name"><a href="#game.tail" alt="game.tail">id_tail</a>
+        </th>
+        <td class="column-type null">
+          INTEGER
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name"><a href="#organizing.task" alt="organizing.task">id_task</a>
+        </th>
+        <td class="column-type null">
+          INTEGER
+        </td>
+        <td></td></tr>
+      </tbody>
+      </table>
+  </tr>
+  <tr tabindex="1"  id="application.user" class="">
+    <th class="table-name label">user<br /><small><a href="#application">application</a></small></th>
+    <td class="description"><p>system user</p>
+  </td>
+    <td>
+      <table class="columns">
+      <tbody>
+        <tr><th class="column-name">ID
+        </th>
+        <td class="column-type serial">
+          
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name">first_name
+        </th>
+        <td class="column-type null">
+          VARCHAR(255)
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name">surname
+        </th>
+        <td class="column-type null">
+          VARCHAR(255)
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name">username
+        </th>
+        <td class="column-type unique">
+          VARCHAR(255)
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name">password
+        </th>
+        <td class="column-type">
+          VARCHAR(255)
+        </td>
+        <td></td></tr>
+        <tr><th class="column-name">admin_level
+        </th>
+        <td class="column-type null">
+          application.admin_level
+        </td>
+        <td></td></tr>
+      </tbody>
+      </table>
+  </tr>
+</tbody>
+</table>
+</div>
+<aside>
+<label for="hideCannotCreate"><input type="checkbox" checked id="hideCannotCreate" onchange="changeDisplay('cannotCreate',this.checked);changeDisplay('cannotCreateParent',this.checked)"/>zobrazit nedokon&ccaron;en&eacute;</label>
+<ul>
+  <li class=""><a href="#game">game</a>
+  <ul>
+    <li class=""><a href="#game.character">character</a></li>
+    <li class=""><a href="#game.character_x_prop">character_x_prop</a></li>
+    <li class=""><a href="#game.event">event</a></li>
+    <li class=""><a href="#game.involvement">involvement</a></li>
+    <li class=""><a href="#game.acquaintance">acquaintance</a></li>
+    <li class=""><a href="#game.prop">prop</a></li>
+    <li class=""><a href="#game.participation">participation</a></li>
+    <li class=""><a href="#game.tail">tail</a></li>
+    <li class=""><a href="#game.tail_x_prop">tail_x_prop</a></li>
+  </ul>
+</li>
+  <li class=""><a href="#application">application</a>
+  <ul>
+    <li class=""><a href="#application.user">user</a></li>
+  </ul>
+</li>
+  <li class=""><a href="#organizing">organizing</a>
+  <ul>
+    <li class=""><a href="#organizing.character_x_task">character_x_task</a></li>
+    <li class=""><a href="#organizing.event_x_task">event_x_task</a></li>
+    <li class=""><a href="#organizing.prop_x_task">prop_x_task</a></li>
+    <li class=""><a href="#organizing.acquintance_x_task">acquintance_x_task</a></li>
+    <li class=""><a href="#organizing.task">task</a></li>
+    <li class=""><a href="#organizing.tail_x_task">tail_x_task</a></li>
+  </ul>
+</li>
+  <li class=""><a href="#player">player</a>
+  <ul>
+    <li class=""><a href="#player.player_x_quality">player_x_quality</a></li>
+    <li class=""><a href="#player.player">player</a></li>
+    <li class=""><a href="#player.quality">quality</a></li>
+  </ul>
+</li>
+</ul>
+</aside>
+<script>
+function changeDisplay(className, showElement) {
+  var elems = document.getElementsByClassName(className);
+  for (i = 0; i < elems.length; i++) {
+    var elem = elems[ i ];
+    if (showElement) {
+      if (elem.tagName.toLowerCase() == 'li') {
+        elem.style.display = 'list-item';
+      } else if (elem.tagName.toLowerCase() == 'tr') {
+        elem.style.display = 'table-row';
+      } else {
+        elem.style.display = 'inline';
+      }
+    } else {
+      elem.style.display = 'none';
+    }
+  }
+}
+</script>
+</body>
+</html>

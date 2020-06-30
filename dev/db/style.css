@@ -1,0 +1,70 @@
+.cannotCreate, .cannotCreateParent {
+  opacity: .6;
+}
+.cannotCreate .label {
+  color: red;
+}
+.cannotCreateParent .label {
+  color: darkred;
+}
+p {
+  margin: .3em;
+}
+table {
+  border-collapse:collapse;
+  border: 1px solid lightgray;
+}
+tr:even {
+  background-color: lightyellow;
+}
+th,td {
+  padding: .1em .3em;
+  border: 1px solid lightgray;
+  text-align: left;
+}
+tr:focus {
+  background-color: lightyellow;
+}
+table.columns {
+  width: 100%;
+}
+.group-name,
+.type-name,
+.table-name,
+.column-name {
+  font-family: 'monospace';
+  font-size: .8em;
+}
+.type-values {
+  font-style: italic;
+}
+.column-type {
+  font-family: 'monospace';
+  font-size: .6em;
+  color: gray;
+}
+.column-type.null:after {
+  content: 'NULL';
+  color: lightgray;
+  margin-left: .3em;
+}
+body {
+  margin-right: 300px;
+}
+aside {
+  font-size: .8em;
+  background-color: lightgray;
+  width: 300px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow-y: auto;
+  max-width: 100%;
+}
+aside a {
+  text-decoration: none;
+}
+td.description {
+    max-width: 350px;
+}
