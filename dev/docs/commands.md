@@ -83,25 +83,38 @@ cd /var/www/plarp/api
 This commands will ask for database column naming convention. Select default option (camelCase).
 
 ```bash
-lb4 discover --dataSource 'development' --views false --all --outDir 'src/models/application' --schema 'application'
+lb4 discover --dataSource 'development' --views false --all --schema 'application'
 ```
 
 This commands will ask for database column naming convention. Select default option (camelCase).
 
 ```bash
-lb4 discover --dataSource 'development' --views false --all --outDir 'src/models/game' --schema 'game'
+lb4 discover --dataSource 'development' --views false --all --schema 'game'
 ```
 
 This commands will ask for database column naming convention. Select default option (camelCase).
 
 ```bash
-lb4 discover --dataSource 'development' --views false --all --outDir 'src/models/organizing' --schema 'organizing'
+lb4 discover --dataSource 'development' --views false --all --schema 'organizing'
 ```
 
 This commands will ask for database column naming convention. Select default option (camelCase).
 
 ```bash
-lb4 discover --dataSource 'development' --views false --all --outDir 'src/models/player' --schema 'player'
+lb4 discover --dataSource 'development' --views false --all --schema 'player'
 ```
 
 After all, regenerate barrel file `api/src/models/index.ts`!
+
+## API: Generate lb4 structures
+
+### lb4 repositories
+```bash
+cd /var/www/plarp/api
+```
+
+This command will ask for selecting models. You can select all by pressing `<a>` key.
+
+```bash
+lb4 repository --datasource 'development'
+```
