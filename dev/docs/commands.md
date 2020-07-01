@@ -118,3 +118,81 @@ This command will ask for selecting models. You can select all by pressing `<a>`
 ```bash
 lb4 repository --datasource 'development'
 ```
+
+## lb4 controllers
+
+```bash
+lb4 controller 'acquaintance'
+```
+
+```bash
+lb4 controller 'event'
+```
+
+```bash
+lb4 controller 'character'
+```
+
+```bash
+lb4 controller 'involvement'
+```
+
+```bash
+lb4 controller 'participation'
+```
+
+```bash
+lb4 controller 'player'
+```
+
+```bash
+lb4 controller 'prop'
+```
+
+```bash
+lb4 controller 'quality'
+```
+
+```bash
+lb4 controller 'tail'
+```
+
+```bash
+lb4 controller 'task'
+```
+
+```bash
+lb4 controller 'user'
+```
+
+```bash
+lb4 controller 'acquintanceXTask'
+```
+
+```bash
+lb4 controller 'eventXTask'
+```
+
+```bash
+lb4 controller 'characterXProp'
+```
+
+```bash
+lb4 controller 'characterXTask'
+```
+
+```bash
+lb4 controller 'playerXQuality'
+```
+
+```bash
+lb4 controller 'propXTask'
+```
+
+```bash
+lb4 controller 'tailXProp'
+```
+
+```bash
+lb4 controller 'tailXTask'
+```
