@@ -3,6 +3,11 @@
 		{
 			"path": "."
 		}
-	],
-	"settings": {}
+  ],
+  "settings": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll": true
+    }
+  },
+
 }
