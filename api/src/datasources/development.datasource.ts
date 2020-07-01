@@ -9,7 +9,7 @@ const config = {
   port: 5432,
   user: 'plarp',
   password: 'plarp',
-  database: 'plarp_dev'
+  database: 'plarp_dev',
 };
 
 // Observe application's life cycle to disconnect the datasource when

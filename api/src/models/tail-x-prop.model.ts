@@ -1,7 +1,10 @@
 import {Entity, model, property} from '@loopback/repository';
 
 @model({
-  settings: {idInjection: false, postgresql: {schema: 'game', table: 'tail_x_prop'}}
+  settings: {
+    idInjection: false,
+    postgresql: {schema: 'game', table: 'tail_x_prop'},
+  },
 })
 export class TailXProp extends Entity {
   @property({
@@ -9,33 +12,68 @@ export class TailXProp extends Entity {
     required: true,
     scale: 0,
     id: 1,
-    postgresql: {columnName: 'id', dataType: 'integer', dataLength: null, dataPrecision: null, dataScale: 0, nullable: 'NO'},
+    postgresql: {
+      columnName: 'id',
+      dataType: 'integer',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: 0,
+      nullable: 'NO',
+    },
   })
   id: number;
 
   @property({
     type: 'number',
     scale: 0,
-    postgresql: {columnName: 'id_tail', dataType: 'integer', dataLength: null, dataPrecision: null, dataScale: 0, nullable: 'YES'},
+    postgresql: {
+      columnName: 'id_tail',
+      dataType: 'integer',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: 0,
+      nullable: 'YES',
+    },
   })
   idTail?: number;
 
   @property({
     type: 'number',
     scale: 0,
-    postgresql: {columnName: 'id_prop', dataType: 'integer', dataLength: null, dataPrecision: null, dataScale: 0, nullable: 'YES'},
+    postgresql: {
+      columnName: 'id_prop',
+      dataType: 'integer',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: 0,
+      nullable: 'YES',
+    },
   })
   idProp?: number;
 
   @property({
     type: 'date',
-    postgresql: {columnName: 'created_at', dataType: 'timestamp without time zone', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
+    postgresql: {
+      columnName: 'created_at',
+      dataType: 'timestamp without time zone',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
   })
   createdAt?: string;
 
   @property({
     type: 'date',
-    postgresql: {columnName: 'updated_at', dataType: 'timestamp without time zone', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
+    postgresql: {
+      columnName: 'updated_at',
+      dataType: 'timestamp without time zone',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
   })
   updatedAt?: string;
 

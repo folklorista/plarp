@@ -3,8 +3,8 @@ import {Entity, model, property} from '@loopback/repository';
 @model({
   settings: {
     idInjection: false,
-    postgresql: {schema: 'organizing', table: 'character_x_task'}
-  }
+    postgresql: {schema: 'organizing', table: 'character_x_task'},
+  },
 })
 export class CharacterXTask extends Entity {
   @property({
@@ -12,33 +12,68 @@ export class CharacterXTask extends Entity {
     required: true,
     scale: 0,
     id: 1,
-    postgresql: {columnName: 'id', dataType: 'integer', dataLength: null, dataPrecision: null, dataScale: 0, nullable: 'NO'},
+    postgresql: {
+      columnName: 'id',
+      dataType: 'integer',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: 0,
+      nullable: 'NO',
+    },
   })
   id: number;
 
   @property({
     type: 'number',
     scale: 0,
-    postgresql: {columnName: 'id_character', dataType: 'integer', dataLength: null, dataPrecision: null, dataScale: 0, nullable: 'YES'},
+    postgresql: {
+      columnName: 'id_character',
+      dataType: 'integer',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: 0,
+      nullable: 'YES',
+    },
   })
   idCharacter?: number;
 
   @property({
     type: 'number',
     scale: 0,
-    postgresql: {columnName: 'id_task', dataType: 'integer', dataLength: null, dataPrecision: null, dataScale: 0, nullable: 'YES'},
+    postgresql: {
+      columnName: 'id_task',
+      dataType: 'integer',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: 0,
+      nullable: 'YES',
+    },
   })
   idTask?: number;
 
   @property({
     type: 'date',
-    postgresql: {columnName: 'created_at', dataType: 'timestamp without time zone', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
+    postgresql: {
+      columnName: 'created_at',
+      dataType: 'timestamp without time zone',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
   })
   createdAt?: string;
 
   @property({
     type: 'date',
-    postgresql: {columnName: 'updated_at', dataType: 'timestamp without time zone', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
+    postgresql: {
+      columnName: 'updated_at',
+      dataType: 'timestamp without time zone',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
   })
   updatedAt?: string;
 
@@ -57,4 +92,5 @@ export interface CharacterXTaskRelations {
   // describe navigational properties here
 }
 
-export type CharacterXTaskWithRelations = CharacterXTask & CharacterXTaskRelations;
+export type CharacterXTaskWithRelations = CharacterXTask &
+  CharacterXTaskRelations;
