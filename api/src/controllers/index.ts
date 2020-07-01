@@ -10,8 +10,6 @@ export * from './prop.controller';
 export * from './quality.controller';
 export * from './tail.controller';
 export * from './task.controller';
-export * from './character-user.controller';
-export * from './tail-user.controller';
 export * from './prop-x-task.controller';
 export * from './acquintance-x-task.controller';
 export * from './event-x-task.controller';
