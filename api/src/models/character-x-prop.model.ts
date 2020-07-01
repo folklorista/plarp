@@ -1,4 +1,6 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, belongsTo} from '@loopback/repository';
+import {Prop} from './prop.model';
+import {Character} from './character.model';
 
 @model({
   settings: {
@@ -22,35 +24,6 @@ export class CharacterXProp extends Entity {
     },
   })
   id: number;
-
-  @property({
-    type: 'number',
-    scale: 0,
-    postgresql: {
-      columnName: 'id_character',
-      dataType: 'integer',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: 0,
-      nullable: 'YES',
-    },
-  })
-  idCharacter?: number;
-
-  @property({
-    type: 'number',
-    scale: 0,
-    postgresql: {
-      columnName: 'id_prop',
-      dataType: 'integer',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: 0,
-      nullable: 'YES',
-    },
-  })
-  idProp?: number;
-
   @property({
     type: 'date',
     postgresql: {
@@ -77,6 +50,33 @@ export class CharacterXProp extends Entity {
   })
   updatedAt?: string;
 
+  @belongsTo(() => Prop, {name: 'prop'},{
+    type: 'number',
+    scale: 0,
+    postgresql: {
+      columnName: 'id_prop',
+      dataType: 'integer',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: 0,
+      nullable: 'YES',
+    },
+  })
+  idProp: number;
+
+  @belongsTo(() => Character, {name: 'character'},{
+    type: 'number',
+    scale: 0,
+    postgresql: {
+      columnName: 'id_character',
+      dataType: 'integer',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: 0,
+      nullable: 'YES',
+    },
+  })
+  idCharacter: number;
   // Define well-known properties here
 
   // Indexer property to allow additional data

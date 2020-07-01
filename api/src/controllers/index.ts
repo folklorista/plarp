@@ -18,3 +18,5 @@ export * from './character-x-task.controller';
 export * from './player-x-quality.controller';
 export * from './tail-x-prop.controller';
 export * from './tail-x-task.controller';
+export * from './character-x-prop-prop.controller';
+export * from './character-x-prop-character.controller';
