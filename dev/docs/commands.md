@@ -119,7 +119,7 @@ This command will ask for selecting models. You can select all by pressing `<a>`
 lb4 repository --datasource 'development'
 ```
 
-## lb4 controllers
+### lb4 controllers
 
 ```bash
 lb4 controller 'acquaintance'
@@ -197,7 +197,7 @@ lb4 controller 'tailXProp'
 lb4 controller 'tailXTask'
 ```
 
-## Cross-table lb4 relations
+### Cross-table lb4 relations
 
 ```bash
 lb4 relation \
@@ -233,4 +233,29 @@ lb4 relation \
 --foreignKeyName='idProp' \
 --relationType='hasMany' \
 --relationName='characterXPropArray'
+```
+
+## Frontend
+
+### Angular Material
+
+```bash
+ng add @angular/material
+ng generate @angular/material:ng-add-setup-project
+```
+
+### navigation
+
+```bash
+ng generate @angular/material:nav --name nav
+```
+
+### first components
+
+```bash
+ng generate @angular/material:table --name character-table
+```
+
+```bash
+ng generate @angular/material:table --name user-table
 ```
