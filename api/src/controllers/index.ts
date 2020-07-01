@@ -20,3 +20,5 @@ export * from './tail-x-prop.controller';
 export * from './tail-x-task.controller';
 export * from './character-x-prop-prop.controller';
 export * from './character-x-prop-character.controller';
+export * from './character-character-x-prop.controller';
+export * from './prop-character-x-prop.controller';

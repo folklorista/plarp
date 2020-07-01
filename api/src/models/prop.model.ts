@@ -1,4 +1,5 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
+import {CharacterXProp} from './character-x-prop.model';
 
 @model({
   settings: {idInjection: false, postgresql: {schema: 'game', table: 'prop'}},
@@ -88,6 +89,8 @@ export class Prop extends Entity {
   })
   updatedAt?: string;
 
+  @hasMany(() => CharacterXProp, {keyTo: 'idProp'})
+  characterXPropArray: CharacterXProp[];
   // Define well-known properties here
 
   // Indexer property to allow additional data

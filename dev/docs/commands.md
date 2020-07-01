@@ -196,3 +196,41 @@ lb4 controller 'tailXProp'
 ```bash
 lb4 controller 'tailXTask'
 ```
+
+## Cross-table lb4 relations
+
+```bash
+lb4 relation \
+--sourceModel='CharacterXProp' \
+--destinationModel='Character' \
+--foreignKeyName='idCharacter' \
+--relationType='belongsTo' \
+--relationName='character'
+```
+
+```bash
+lb4 relation \
+--sourceModel='Character' \
+--destinationModel='CharacterXProp' \
+--foreignKeyName='idCharacter' \
+--relationType='hasMany' \
+--relationName='characterXPropArray'
+```
+
+```bash
+lb4 relation \
+--sourceModel='CharacterXProp' \
+--destinationModel='Prop' \
+--foreignKeyName='idProp' \
+--relationType='belongsTo' \
+--relationName='prop'
+```
+
+```bash
+lb4 relation \
+--sourceModel='Prop' \
+--destinationModel='CharacterXProp' \
+--foreignKeyName='idProp' \
+--relationType='hasMany' \
+--relationName='characterXPropArray'
+```
