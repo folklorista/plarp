@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { fromEvent, merge } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 
@@ -29,8 +29,9 @@ export class CharacterTableComponent implements AfterViewInit, OnInit {
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['_actions', 'name', 'summaryShort'];
   searchedColumns = ['name', 'summaryShort'];
+  routeUrl = 'character';
 
-  constructor(private apiService: CharacterService) {}
+  constructor(private apiService: CharacterService, protected router: Router) {}
 
   ngOnInit() {
     this.dataSource = new CharactersDataSource(this.apiService);
@@ -68,6 +69,7 @@ export class CharacterTableComponent implements AfterViewInit, OnInit {
   }
 
   goToDetail(row: Base): void {
+    this.router.navigate([this.routeUrl, row.id]);
     console.log('row', row);
   }
 }

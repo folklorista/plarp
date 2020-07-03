@@ -19,6 +19,11 @@ import { AppComponent } from './app.component';
 import { CharacterTableComponent } from './character-table/character-table.component';
 import { NavComponent } from './nav/nav.component';
 import { UserTableComponent } from './user-table/user-table.component';
+import { CharacterFormComponent } from './character-form/character-form.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCardModule } from '@angular/material/card';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,6 +31,7 @@ import { UserTableComponent } from './user-table/user-table.component';
     NavComponent,
     CharacterTableComponent,
     UserTableComponent,
+    CharacterFormComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -43,6 +49,10 @@ import { UserTableComponent } from './user-table/user-table.component';
     MatSortModule,
     MatTableModule,
     MatToolbarModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatCardModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
