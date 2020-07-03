@@ -5,8 +5,15 @@
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="/character" routerLinkActive="active">Characters</a>
-      <a mat-list-item routerLink="/user" routerLinkActive="active">Users</a>
+      <a mat-list-item routerLink="/character" routerLinkActive="active">Role</a>
+      <a mat-list-item routerLink="/acquaintance" routerLinkActive="active">Ví se o</a>
+      <a mat-list-item routerLink="/tail" routerLinkActive="active">Linky</a>
+      <a mat-list-item routerLink="/event" routerLinkActive="active">Události</a>
+      <a mat-list-item routerLink="/prop" routerLinkActive="active">Rekvizity</a>
+      <a mat-list-item><i>Vybavení</i></a>
+      <a mat-list-item routerLink="/task" routerLinkActive="active">Úkoly</a>
+      <a mat-list-item routerLink="/user" routerLinkActive="active">Autoři</a>
+      <a mat-list-item routerLink="/player" routerLinkActive="active">Hráči</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -19,7 +26,6 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>plarp</span>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
