@@ -8,7 +8,7 @@ import { BaseService } from './base.service';
   providedIn: 'root',
 })
 export class InvolvementService extends BaseService<Involvement> {
-  apiUrl = '/api/involvements';
+  apiUrlModel = 'involvements';
   constructor(protected http: HttpClient) {
     super(http);
   }
