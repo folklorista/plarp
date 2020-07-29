@@ -1,4 +1,6 @@
-import {model, property, Entity} from '@loopback/repository';
+import {belongsTo, model, property, Entity} from '@loopback/repository';
+
+import {Character} from './character.model';
 
 @model({
   settings: {
@@ -22,35 +24,6 @@ export class Acquaintance extends Entity {
     },
   })
   id: number;
-
-  @property({
-    type: 'number',
-    scale: 0,
-    postgresql: {
-      columnName: 'id_character',
-      dataType: 'integer',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: 0,
-      nullable: 'YES',
-    },
-  })
-  idCharacter?: number;
-
-  @property({
-    type: 'number',
-    scale: 0,
-    postgresql: {
-      columnName: 'id_object',
-      dataType: 'integer',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: 0,
-      nullable: 'YES',
-    },
-  })
-  idObject?: number;
-
   @property({
     type: 'string',
     postgresql: {
@@ -116,6 +89,41 @@ export class Acquaintance extends Entity {
   })
   updatedAt?: string;
 
+  @belongsTo(
+    () => Character,
+    {name: 'character'},
+    {
+      type: 'number',
+      scale: 0,
+      postgresql: {
+        columnName: 'id_character',
+        dataType: 'integer',
+        dataLength: null,
+        dataPrecision: null,
+        dataScale: 0,
+        nullable: 'YES',
+      },
+    },
+  )
+  idCharacter: number;
+
+  @belongsTo(
+    () => Character,
+    {name: 'object'},
+    {
+      type: 'number',
+      scale: 0,
+      postgresql: {
+        columnName: 'id_object',
+        dataType: 'integer',
+        dataLength: null,
+        dataPrecision: null,
+        dataScale: 0,
+        nullable: 'YES',
+      },
+    },
+  )
+  idObject: number;
   // Define well-known properties here
 
   // Indexer property to allow additional data

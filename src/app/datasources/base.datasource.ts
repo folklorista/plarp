@@ -22,14 +22,22 @@ export abstract class BaseDataSource<T extends Base> implements DataSource<T> {
     searchedColumns: string[],
     sortDirection: string,
     pageIndex: number,
-    pageSize: number
+    pageSize: number,
+    relations?: string[]
   ) {
     this.loadingSubject.next(true);
 
     this.count$ = this.apiService.count(searchedString, searchedColumns);
 
     this.apiService
-      .find(searchedString, searchedColumns, sortDirection, pageIndex, pageSize)
+      .find(
+        searchedString,
+        searchedColumns,
+        sortDirection,
+        pageIndex,
+        pageSize,
+        relations
+      )
       .pipe(
         catchError(() => of([])),
         finalize(() => this.loadingSubject.next(false))

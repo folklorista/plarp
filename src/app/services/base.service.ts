@@ -10,6 +10,11 @@ interface CountResponse {
   count: number;
 }
 
+interface Inclusion {
+  relation: string;
+  scope?: Filter;
+}
+
 export interface Filter {
   offset?: number;
   limit?: number;
@@ -17,6 +22,7 @@ export interface Filter {
   order?: string[];
   where?: object;
   fields?: object;
+  include?: Inclusion[];
 }
 
 @Injectable()
@@ -41,13 +47,20 @@ export abstract class BaseService<T extends Base> {
     searchedColumns?: string[],
     sortDirection = 'asc',
     pageNumber = 0,
-    pageSize = 10
+    pageSize = 10,
+    relations?: string[]
   ): Observable<T[]> {
     const filter: Filter = {
       where: this.buildWhere(searchedString, searchedColumns),
       order: this.buildOrder(sortDirection),
       offset: pageNumber * pageSize,
       limit: pageSize,
+      include: relations
+        ? relations.map((rel) => {
+            const result: Inclusion = { relation: rel };
+            return result;
+          })
+        : null,
     };
 
     const params = new HttpParams().set('filter', JSON.stringify(filter));
