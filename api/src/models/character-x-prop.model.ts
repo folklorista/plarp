@@ -1,6 +1,7 @@
-import {Entity, model, property, belongsTo} from '@loopback/repository';
-import {Prop} from './prop.model';
+import {belongsTo, model, property, Entity} from '@loopback/repository';
+
 import {Character} from './character.model';
+import {Prop} from './prop.model';
 
 @model({
   settings: {
@@ -11,7 +12,7 @@ import {Character} from './character.model';
 export class CharacterXProp extends Entity {
   @property({
     type: 'number',
-    required: true,
+    required: false,
     scale: 0,
     id: 1,
     postgresql: {
@@ -50,32 +51,40 @@ export class CharacterXProp extends Entity {
   })
   updatedAt?: string;
 
-  @belongsTo(() => Prop, {name: 'prop'},{
-    type: 'number',
-    scale: 0,
-    postgresql: {
-      columnName: 'id_prop',
-      dataType: 'integer',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: 0,
-      nullable: 'YES',
+  @belongsTo(
+    () => Prop,
+    {name: 'prop'},
+    {
+      type: 'number',
+      scale: 0,
+      postgresql: {
+        columnName: 'id_prop',
+        dataType: 'integer',
+        dataLength: null,
+        dataPrecision: null,
+        dataScale: 0,
+        nullable: 'YES',
+      },
     },
-  })
+  )
   idProp: number;
 
-  @belongsTo(() => Character, {name: 'character'},{
-    type: 'number',
-    scale: 0,
-    postgresql: {
-      columnName: 'id_character',
-      dataType: 'integer',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: 0,
-      nullable: 'YES',
+  @belongsTo(
+    () => Character,
+    {name: 'character'},
+    {
+      type: 'number',
+      scale: 0,
+      postgresql: {
+        columnName: 'id_character',
+        dataType: 'integer',
+        dataLength: null,
+        dataPrecision: null,
+        dataScale: 0,
+        nullable: 'YES',
+      },
     },
-  })
+  )
   idCharacter: number;
   // Define well-known properties here
 

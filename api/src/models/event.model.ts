@@ -1,4 +1,4 @@
-import {Entity, model, property} from '@loopback/repository';
+import {model, property, Entity} from '@loopback/repository';
 
 @model({
   settings: {idInjection: false, postgresql: {schema: 'game', table: 'event'}},
@@ -6,7 +6,7 @@ import {Entity, model, property} from '@loopback/repository';
 export class Event extends Entity {
   @property({
     type: 'number',
-    required: true,
+    required: false,
     scale: 0,
     id: 1,
     postgresql: {

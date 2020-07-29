@@ -8,6 +8,7 @@ import { UserTableComponent } from './user-table/user-table.component';
 const routes: Routes = [
   { path: 'character', component: CharacterTableComponent },
   { path: 'character/:id', component: CharacterFormComponent },
+  { path: 'character/new', component: CharacterFormComponent },
   { path: 'user', component: UserTableComponent },
 ];
 

@@ -57,6 +57,17 @@ export abstract class BaseService<T extends Base> {
     });
   }
 
+  create(model: T): Observable<T> {
+    return this.http.post<T>(`${this.apiUrl}/${this.apiUrlModel}`, model);
+  }
+
+  update(id: number, model: T): Observable<void> {
+    return this.http.put<void>(
+      `${this.apiUrl}/${this.apiUrlModel}/${id}`,
+      model
+    );
+  }
+
   count(
     searchedString?: string,
     searchedColumns?: string[]

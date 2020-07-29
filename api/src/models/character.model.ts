@@ -1,4 +1,5 @@
-import {Entity, model, property, hasMany} from '@loopback/repository';
+import {hasMany, model, property, Entity} from '@loopback/repository';
+
 import {CharacterXProp} from './character-x-prop.model';
 
 @model({
@@ -10,7 +11,7 @@ import {CharacterXProp} from './character-x-prop.model';
 export class Character extends Entity {
   @property({
     type: 'number',
-    required: true,
+    required: false,
     scale: 0,
     id: 1,
     postgresql: {
@@ -41,6 +42,7 @@ export class Character extends Entity {
 
   @property({
     type: 'string',
+    required: false,
     postgresql: {
       columnName: 'description',
       dataType: 'text',

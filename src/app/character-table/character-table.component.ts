@@ -68,8 +68,7 @@ export class CharacterTableComponent implements AfterViewInit, OnInit {
     );
   }
 
-  goToDetail(row: Base): void {
-    this.router.navigate([this.routeUrl, row.id]);
-    console.log('row', row);
+  goToDetail(row?: Base): void {
+    this.router.navigate([this.routeUrl, row ? row.id : 'new']);
   }
 }
