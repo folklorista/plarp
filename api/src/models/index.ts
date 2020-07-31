@@ -1,3 +1,4 @@
+export * from './base.model';
 export * from './user.model';
 export * from './acquaintance.model';
 export * from './tail.model';
@@ -13,7 +14,7 @@ export * from './task.model';
 export * from './event-x-task.model';
 export * from './tail-x-task.model';
 export * from './prop-x-task.model';
-export * from './acquintance-x-task.model';
+export * from './acquaintance-x-task.model';
 export * from './player.model';
 export * from './quality.model';
 export * from './player-x-quality.model';

@@ -20,7 +20,7 @@ CREATE OR REPLACE FUNCTION drop_all () RETURNS VOID AS $$
        RETURN;
    END;
    $$ LANGUAGE PLPGSQL;
- 
+
 -- drop all schemas
 select drop_all();
 
@@ -267,10 +267,10 @@ CREATE TABLE IF NOT EXISTS organizing.prop_x_task
 
 
 
-CREATE TABLE IF NOT EXISTS organizing.acquintance_x_task
+CREATE TABLE IF NOT EXISTS organizing.acquaintance_x_task
 (
     ID SERIAL,
-    id_acquintance INTEGER,
+    id_acquaintance INTEGER,
     id_task INTEGER,
     created_at timestamp without time zone DEFAULT timezone('cet'::text, now()),
     updated_at timestamp without time zone,
@@ -409,18 +409,18 @@ ALTER TABLE organizing.prop_x_task
     MATCH SIMPLE
 ;
 
-ALTER TABLE organizing.acquintance_x_task
-    DROP CONSTRAINT IF EXISTS "acquintance_x_task_id_task_fkey",
-    ADD CONSTRAINT "acquintance_x_task_id_task_fkey"
+ALTER TABLE organizing.acquaintance_x_task
+    DROP CONSTRAINT IF EXISTS "acquaintance_x_task_id_task_fkey",
+    ADD CONSTRAINT "acquaintance_x_task_id_task_fkey"
     FOREIGN KEY (id_task)
     REFERENCES organizing.task(ID)
     MATCH SIMPLE
 ;
 
-ALTER TABLE organizing.acquintance_x_task
-    DROP CONSTRAINT IF EXISTS "acquintance_x_task_id_acquintance_fkey",
-    ADD CONSTRAINT "acquintance_x_task_id_acquintance_fkey"
-    FOREIGN KEY (id_acquintance)
+ALTER TABLE organizing.acquaintance_x_task
+    DROP CONSTRAINT IF EXISTS "acquaintance_x_task_id_acquaintance_fkey",
+    ADD CONSTRAINT "acquaintance_x_task_id_acquaintance_fkey"
+    FOREIGN KEY (id_acquaintance)
     REFERENCES game.acquaintance(ID)
     MATCH SIMPLE
 ;

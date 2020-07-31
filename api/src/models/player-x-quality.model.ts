@@ -1,4 +1,8 @@
-import {model, property, Entity} from '@loopback/repository';
+import {belongsTo, model, property} from '@loopback/repository';
+
+import {BaseModel} from './base.model';
+import {Player} from './player.model';
+import {Quality} from './quality.model';
 
 @model({
   settings: {
@@ -6,7 +10,7 @@ import {model, property, Entity} from '@loopback/repository';
     postgresql: {schema: 'player', table: 'player_x_quality'},
   },
 })
-export class PlayerXQuality extends Entity {
+export class PlayerXQuality extends BaseModel {
   @property({
     type: 'number',
     required: false,
@@ -22,35 +26,6 @@ export class PlayerXQuality extends Entity {
     },
   })
   id: number;
-
-  @property({
-    type: 'number',
-    scale: 0,
-    postgresql: {
-      columnName: 'id_player',
-      dataType: 'integer',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: 0,
-      nullable: 'YES',
-    },
-  })
-  idPlayer?: number;
-
-  @property({
-    type: 'number',
-    scale: 0,
-    postgresql: {
-      columnName: 'id_quality',
-      dataType: 'integer',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: 0,
-      nullable: 'YES',
-    },
-  })
-  idQuality?: number;
-
   @property({
     type: 'number',
     scale: 0,
@@ -91,6 +66,41 @@ export class PlayerXQuality extends Entity {
   })
   updatedAt?: string;
 
+  @belongsTo(
+    () => Player,
+    {name: 'player'},
+    {
+      type: 'number',
+      scale: 0,
+      postgresql: {
+        columnName: 'id_player',
+        dataType: 'integer',
+        dataLength: null,
+        dataPrecision: null,
+        dataScale: 0,
+        nullable: 'YES',
+      },
+    },
+  )
+  idPlayer: number;
+
+  @belongsTo(
+    () => Quality,
+    {name: 'quality'},
+    {
+      type: 'number',
+      scale: 0,
+      postgresql: {
+        columnName: 'id_quality',
+        dataType: 'integer',
+        dataLength: null,
+        dataPrecision: null,
+        dataScale: 0,
+        nullable: 'YES',
+      },
+    },
+  )
+  idQuality: number;
   // Define well-known properties here
 
   // Indexer property to allow additional data

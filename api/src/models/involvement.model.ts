@@ -1,4 +1,8 @@
-import {model, property, Entity} from '@loopback/repository';
+import {belongsTo, model, property} from '@loopback/repository';
+
+import {BaseModel} from './base.model';
+import {Character} from './character.model';
+import {Tail} from './tail.model';
 
 @model({
   settings: {
@@ -6,7 +10,7 @@ import {model, property, Entity} from '@loopback/repository';
     postgresql: {schema: 'game', table: 'involvement'},
   },
 })
-export class Involvement extends Entity {
+export class Involvement extends BaseModel {
   @property({
     type: 'number',
     required: false,
@@ -22,35 +26,6 @@ export class Involvement extends Entity {
     },
   })
   id: number;
-
-  @property({
-    type: 'number',
-    scale: 0,
-    postgresql: {
-      columnName: 'id_tail',
-      dataType: 'integer',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: 0,
-      nullable: 'YES',
-    },
-  })
-  idTail?: number;
-
-  @property({
-    type: 'number',
-    scale: 0,
-    postgresql: {
-      columnName: 'id_character',
-      dataType: 'integer',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: 0,
-      nullable: 'YES',
-    },
-  })
-  idCharacter?: number;
-
   @property({
     type: 'string',
     postgresql: {
@@ -116,6 +91,41 @@ export class Involvement extends Entity {
   })
   updatedAt?: string;
 
+  @belongsTo(
+    () => Character,
+    {name: 'character'},
+    {
+      type: 'number',
+      scale: 0,
+      postgresql: {
+        columnName: 'id_character',
+        dataType: 'integer',
+        dataLength: null,
+        dataPrecision: null,
+        dataScale: 0,
+        nullable: 'YES',
+      },
+    },
+  )
+  idCharacter: number;
+
+  @belongsTo(
+    () => Tail,
+    {name: 'tail'},
+    {
+      type: 'number',
+      scale: 0,
+      postgresql: {
+        columnName: 'id_tail',
+        dataType: 'integer',
+        dataLength: null,
+        dataPrecision: null,
+        dataScale: 0,
+        nullable: 'YES',
+      },
+    },
+  )
+  idTail: number;
   // Define well-known properties here
 
   // Indexer property to allow additional data

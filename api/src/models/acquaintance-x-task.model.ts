@@ -1,12 +1,14 @@
-import {model, property, Entity} from '@loopback/repository';
+import {model, property} from '@loopback/repository';
+
+import {BaseModel} from './base.model';
 
 @model({
   settings: {
     idInjection: false,
-    postgresql: {schema: 'organizing', table: 'acquintance_x_task'},
+    postgresql: {schema: 'organizing', table: 'acquaintance_x_task'},
   },
 })
-export class AcquintanceXTask extends Entity {
+export class AcquaintanceXTask extends BaseModel {
   @property({
     type: 'number',
     required: false,
@@ -27,7 +29,7 @@ export class AcquintanceXTask extends Entity {
     type: 'number',
     scale: 0,
     postgresql: {
-      columnName: 'id_acquintance',
+      columnName: 'id_acquaintance',
       dataType: 'integer',
       dataLength: null,
       dataPrecision: null,
@@ -35,7 +37,7 @@ export class AcquintanceXTask extends Entity {
       nullable: 'YES',
     },
   })
-  idAcquintance?: number;
+  idAcquaintance?: number;
 
   @property({
     type: 'number',
@@ -83,14 +85,14 @@ export class AcquintanceXTask extends Entity {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [prop: string]: any;
 
-  constructor(data?: Partial<AcquintanceXTask>) {
+  constructor(data?: Partial<AcquaintanceXTask>) {
     super(data);
   }
 }
 
-export interface AcquintanceXTaskRelations {
+export interface AcquaintanceXTaskRelations {
   // describe navigational properties here
 }
 
-export type AcquintanceXTaskWithRelations = AcquintanceXTask &
-  AcquintanceXTaskRelations;
+export type AcquaintanceXTaskWithRelations = AcquaintanceXTask &
+  AcquaintanceXTaskRelations;

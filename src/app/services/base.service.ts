@@ -29,6 +29,7 @@ export interface Filter {
 export abstract class BaseService<T extends Base> {
   protected apiUrl: string;
   protected abstract apiUrlModel: string;
+  protected relations: string[] = [];
 
   constructor(protected http: HttpClient) {
     this.apiUrl = environment.apiUrl;
@@ -50,17 +51,13 @@ export abstract class BaseService<T extends Base> {
     pageSize = 10,
     relations?: string[]
   ): Observable<T[]> {
+    const rels = relations ? relations : this.relations;
     const filter: Filter = {
       where: this.buildWhere(searchedString, searchedColumns),
       order: this.buildOrder(sortDirection),
       offset: pageNumber * pageSize,
       limit: pageSize,
-      include: relations
-        ? relations.map((rel) => {
-            const result: Inclusion = { relation: rel };
-            return result;
-          })
-        : null,
+      include: this.buildIncludeFilter(rels),
     };
 
     const params = new HttpParams().set('filter', JSON.stringify(filter));
@@ -120,5 +117,29 @@ export abstract class BaseService<T extends Base> {
   private buildOrder(sortDirection: string): string[] {
     // TODO: sort column with direction
     return null;
+  }
+
+  private buildIncludeFilter(rels: string[]): Inclusion[] {
+    const result: Inclusion[] = rels.map((rel) => {
+      const path = rel.split('.');
+      return this.processRelation(path);
+    });
+    return result;
+  }
+
+  private processRelation(path: string[]): Inclusion {
+    // ['player.xQuality'] → [{"relation":"player","scope":{"include":[{"relation":"xQuality"}]
+    // level 0
+    const result: Inclusion = {
+      relation: path.shift(),
+    };
+
+    // level 1
+    if (path.length) {
+      result.scope = {
+        include: [this.processRelation(path)],
+      };
+    }
+    return result;
   }
 }

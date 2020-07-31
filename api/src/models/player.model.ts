@@ -1,4 +1,7 @@
-import {model, property, Entity} from '@loopback/repository';
+import {hasMany, model, property} from '@loopback/repository';
+
+import {BaseModel} from './base.model';
+import {PlayerXQuality} from './player-x-quality.model';
 
 @model({
   settings: {
@@ -6,7 +9,7 @@ import {model, property, Entity} from '@loopback/repository';
     postgresql: {schema: 'player', table: 'player'},
   },
 })
-export class Player extends Entity {
+export class Player extends BaseModel {
   @property({
     type: 'number',
     required: false,
@@ -147,6 +150,8 @@ export class Player extends Entity {
   })
   updatedAt?: string;
 
+  @hasMany(() => PlayerXQuality, {keyTo: 'idPlayer'})
+  xQuality: PlayerXQuality[];
   // Define well-known properties here
 
   // Indexer property to allow additional data

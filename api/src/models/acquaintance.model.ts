@@ -1,5 +1,6 @@
-import {belongsTo, model, property, Entity} from '@loopback/repository';
+import {belongsTo, model, property} from '@loopback/repository';
 
+import { BaseModel } from './base.model';
 import {Character} from './character.model';
 
 @model({
@@ -8,7 +9,7 @@ import {Character} from './character.model';
     postgresql: {schema: 'game', table: 'acquaintance'},
   },
 })
-export class Acquaintance extends Entity {
+export class Acquaintance extends BaseModel {
   @property({
     type: 'number',
     required: false,

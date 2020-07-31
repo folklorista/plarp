@@ -46,7 +46,6 @@ export abstract class BaseDataSource<T extends Base> implements DataSource<T> {
   }
 
   connect(collectionViewer: CollectionViewer): Observable<T[]> {
-    console.log('Connecting data source');
     return this.subject.asObservable();
   }
 

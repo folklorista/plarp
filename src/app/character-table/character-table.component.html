@@ -1,4 +1,4 @@
-<mat-form-field>
+<mat-form-field  appearance="fill" [style.display]="'none'">
   <input matInput placeholder="Hledání v postavách" #input />
 </mat-form-field>
 
@@ -42,7 +42,7 @@
     <mat-cell *matCellDef="let character">{{ character.name }}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="summaryShort">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>popis</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header>krátký popis</mat-header-cell>
     <mat-cell *matCellDef="let character">{{
       character.summaryShort
     }}</mat-cell>

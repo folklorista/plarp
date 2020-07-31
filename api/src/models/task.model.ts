@@ -1,4 +1,6 @@
-import {model, property, Entity} from '@loopback/repository';
+import {model, property} from '@loopback/repository';
+
+import {BaseModel} from './base.model';
 
 @model({
   settings: {
@@ -6,7 +8,7 @@ import {model, property, Entity} from '@loopback/repository';
     postgresql: {schema: 'organizing', table: 'task'},
   },
 })
-export class Task extends Entity {
+export class Task extends BaseModel {
   @property({
     type: 'number',
     required: false,

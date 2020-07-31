@@ -2,6 +2,6 @@ import { BaseExtended } from './base-extended';
 import { Involvement } from './involvement';
 
 export interface Tail extends BaseExtended {
-  name: string;
-  involvementArray: Involvement[];
+  name?: string;
+  involvements?: Involvement[];
 }

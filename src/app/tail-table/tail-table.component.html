@@ -1,0 +1,53 @@
+<mat-form-field  appearance="fill" [style.display]="'none'">
+  <input matInput placeholder="Hledání v linkách" #input />
+</mat-form-field>
+
+<div align="end">
+  <button
+    mat-icon-button
+    aria-label="open in new tab icon"
+    (click)="goToDetail(null)"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
+<div class="spinner-container" *ngIf="dataSource.loading$ | async">
+  <mat-spinner></mat-spinner>
+</div>
+
+<mat-table
+  class="tails-table mat-elevation-z8"
+  [dataSource]="dataSource"
+  matSort
+  matSortActive="name"
+  matSortDirection="asc"
+  matSortDisableClear
+>
+  <ng-container matColumnDef="_actions">
+    <mat-header-cell mat-header-cell *matHeaderCellDef>akce</mat-header-cell>
+    <mat-cell *matCellDef="let row" [class.highlight]="row._highlight">
+      <button
+        mat-icon-button
+        aria-label="open in new tab icon"
+        (click)="goToDetail(row)"
+      >
+        <mat-icon>open_in_new</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>jméno</mat-header-cell>
+    <mat-cell *matCellDef="let tail">{{ tail.name }}</mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>
+
+<mat-paginator
+  [length]="dataSource.count$ | async"
+  [pageIndex]="0"
+  [pageSize]="10"
+  [pageSizeOptions]="[10, 100, 1000]"
+></mat-paginator>

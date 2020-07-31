@@ -1,9 +1,12 @@
-import {model, property, Entity} from '@loopback/repository';
+import {model, property, hasMany} from '@loopback/repository';
+
+import {BaseModel} from './base.model';
+import {Involvement} from './involvement.model';
 
 @model({
   settings: {idInjection: false, postgresql: {schema: 'game', table: 'tail'}},
 })
-export class Tail extends Entity {
+export class Tail extends BaseModel {
   @property({
     type: 'number',
     required: false,
@@ -114,6 +117,8 @@ export class Tail extends Entity {
   })
   updatedAt?: string;
 
+  @hasMany(() => Involvement, {keyTo: 'idTail'})
+  involvements: Involvement[];
   // Define well-known properties here
 
   // Indexer property to allow additional data

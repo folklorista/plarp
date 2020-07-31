@@ -166,7 +166,7 @@ lb4 controller 'user'
 ```
 
 ```bash
-lb4 controller 'acquintanceXTask'
+lb4 controller 'acquaintanceXTask'
 ```
 
 ```bash

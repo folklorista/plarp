@@ -662,7 +662,7 @@
         <type href="pathmap://RDS_LIBRARIES/RdsPrimitiveTypes.library.rds#//@elements.5"/>
       </columns>
     </elements>
-    <elements xsi:type="com.genmymodel.rds.core:Table" xmi:id="_xaHn5LrEEeqEM7mFKilpXw" name="acquintance_x_task">
+    <elements xsi:type="com.genmymodel.rds.core:Table" xmi:id="_xaHn5LrEEeqEM7mFKilpXw" name="acquaintance_x_task">
       <eAnnotations xmi:id="_xaHn5brEEeqEM7mFKilpXw" source="genmymodel">
         <details xmi:id="_xaHn5rrEEeqEM7mFKilpXw" key="uuid" value="_TKYTP7qfEeqEM7mFKilpXw"/>
       </eAnnotations>
@@ -672,7 +672,7 @@
         </eAnnotations>
         <type href="pathmap://RDS_LIBRARIES/RdsPrimitiveTypes.library.rds#//@elements.5"/>
       </columns>
-      <columns xmi:id="_xaHn6rrEEeqEM7mFKilpXw" name="id_acquintance" foreignReferences="_xaHoF7rEEeqEM7mFKilpXw">
+      <columns xmi:id="_xaHn6rrEEeqEM7mFKilpXw" name="id_acquaintance" foreignReferences="_xaHoF7rEEeqEM7mFKilpXw">
         <eAnnotations xmi:id="_xaHn67rEEeqEM7mFKilpXw" source="genmymodel">
           <details xmi:id="_xaHn7LrEEeqEM7mFKilpXw" key="uuid" value="_TKYTQbqfEeqEM7mFKilpXw"/>
         </eAnnotations>

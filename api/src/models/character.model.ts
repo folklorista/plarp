@@ -1,6 +1,11 @@
-import {hasMany, model, property, Entity} from '@loopback/repository';
+import {belongsTo, hasMany, model, property, hasOne} from '@loopback/repository';
 
+import {BaseModel} from './base.model';
 import {CharacterXProp} from './character-x-prop.model';
+import {User} from './user.model';
+import {Player} from './player.model';
+import {Acquaintance} from './acquaintance.model';
+import {Involvement} from './involvement.model';
 
 @model({
   settings: {
@@ -8,7 +13,7 @@ import {CharacterXProp} from './character-x-prop.model';
     postgresql: {schema: 'game', table: 'character'},
   },
 })
-export class Character extends Entity {
+export class Character extends BaseModel {
   @property({
     type: 'number',
     required: false,
@@ -28,6 +33,7 @@ export class Character extends Entity {
   @property({
     type: 'string',
     required: true,
+    default: '',
     length: 255,
     postgresql: {
       columnName: 'name',
@@ -52,10 +58,11 @@ export class Character extends Entity {
       nullable: 'YES',
     },
   })
-  description?: string;
+  description: string;
 
   @property({
     type: 'string',
+    required: false,
     postgresql: {
       columnName: 'sandbox',
       dataType: 'text',
@@ -69,6 +76,7 @@ export class Character extends Entity {
 
   @property({
     type: 'string',
+    required: false,
     postgresql: {
       columnName: 'org_note',
       dataType: 'text',
@@ -82,6 +90,7 @@ export class Character extends Entity {
 
   @property({
     type: 'string',
+    required: false,
     postgresql: {
       columnName: 'summary_short',
       dataType: 'text',
@@ -95,6 +104,7 @@ export class Character extends Entity {
 
   @property({
     type: 'string',
+    required: false,
     postgresql: {
       columnName: 'summary_long',
       dataType: 'text',
@@ -108,6 +118,7 @@ export class Character extends Entity {
 
   @property({
     type: 'string',
+    required: false,
     postgresql: {
       columnName: 'equipment',
       dataType: 'text',
@@ -118,21 +129,6 @@ export class Character extends Entity {
     },
   })
   equipment?: string;
-
-  @property({
-    type: 'number',
-    scale: 0,
-    postgresql: {
-      columnName: 'id_user',
-      dataType: 'integer',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: 0,
-      nullable: 'YES',
-    },
-  })
-  idUser?: number;
-
   @property({
     type: 'date',
     postgresql: {
@@ -161,6 +157,39 @@ export class Character extends Entity {
 
   @hasMany(() => CharacterXProp, {keyTo: 'idCharacter'})
   characterXPropArray: CharacterXProp[];
+
+  @belongsTo(
+    () => User,
+    {name: 'user'},
+    {
+      type: 'number',
+      scale: 0,
+      postgresql: {
+        columnName: 'id_user',
+        dataType: 'integer',
+        dataLength: null,
+        dataPrecision: null,
+        dataScale: 0,
+        nullable: 'YES',
+      },
+    },
+  )
+  idUser: number;
+
+  @hasOne(() => Player, {keyTo: 'idCharacter'})
+  player: Player;
+
+  @hasMany(() => Acquaintance, {keyTo: 'idCharacter'})
+  acquaintances: Acquaintance[];
+
+  @hasMany(() => Acquaintance, {keyTo: 'idObject'})
+  acquaintancesAsObject: Acquaintance[];
+
+  @hasMany(() => Involvement, {keyTo: 'idCharacter'})
+  involvements: Involvement[];
+
+  @hasMany(() => CharacterXProp, {keyTo: 'idCharacter'})
+  xProps: CharacterXProp[];
   // Define well-known properties here
 
   // Indexer property to allow additional data

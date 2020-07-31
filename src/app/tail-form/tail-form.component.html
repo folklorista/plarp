@@ -1,0 +1,95 @@
+<mat-sidenav-container class="example-container" *ngIf="model; else loading">
+  <mat-sidenav opened mode="side" position="end" class="sidenav-details">
+    <ng-container *ngIf="model.involvements">
+      <h2>Zapojené role</h2>
+      <ul>
+        <li *ngFor="let involvement of model.involvements">
+          {{ involvement.character.name }}
+        </li>
+      </ul>
+    </ng-container>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <form [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
+      <mat-card class="card-form">
+        <mat-card-header>
+          <mat-card-title>Příběhová linka</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="row">
+            <div class="col">
+              <mat-form-field appearance="fill" class="full-width">
+                <input matInput placeholder="název" formControlName="name" />
+                <mat-error *ngIf="form.controls['name'].hasError('required')">
+                  Toto pole je <strong>povinné</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field appearance="fill" class="full-width">
+                <textarea
+                  matInput
+                  placeholder="popis"
+                  formControlName="description"
+                ></textarea>
+                <mat-error
+                  *ngIf="form.controls['description'].hasError('required')"
+                >
+                  Toto pole je <strong>povinné</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field appearance="fill" class="full-width">
+                <textarea
+                  matInput
+                  placeholder="pískoviště"
+                  formControlName="sandbox"
+                ></textarea>
+                <mat-error
+                  *ngIf="form.controls['sandbox'].hasError('required')"
+                >
+                  Toto pole je <strong>povinné</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field appearance="fill" class="full-width">
+                <textarea
+                  matInput
+                  placeholder="organizačně"
+                  formControlName="orgNote"
+                ></textarea>
+                <mat-error
+                  *ngIf="form.controls['orgNote'].hasError('required')"
+                >
+                  Toto pole je <strong>povinné</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="!form.valid"
+          >
+            Uložit
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </form>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<ng-template #loading>
+  Načítám data...
+</ng-template>

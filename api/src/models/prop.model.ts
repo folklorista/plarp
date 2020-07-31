@@ -1,11 +1,12 @@
-import {hasMany, model, property, Entity} from '@loopback/repository';
+import {hasMany, model, property} from '@loopback/repository';
 
+import {BaseModel} from './base.model';
 import {CharacterXProp} from './character-x-prop.model';
 
 @model({
   settings: {idInjection: false, postgresql: {schema: 'game', table: 'prop'}},
 })
-export class Prop extends Entity {
+export class Prop extends BaseModel {
   @property({
     type: 'number',
     required: false,

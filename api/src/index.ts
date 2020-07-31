@@ -1,9 +1,22 @@
 import {ApplicationConfig, PlarpApplication} from './application';
+import {patchPersistedModel} from './patch';
 
 export * from './application';
 
 export async function main(options: ApplicationConfig = {}) {
   const app = new PlarpApplication(options);
+  /**
+   *  Due to our needs for INNER JOIN we use our fork
+   *  from loopback-connector-postgresql but we need
+   *  to keep the relations on PersistedModel.
+   *
+   *  @todo Use Loopback TypeORM Component when it's ready
+   *  Remove the patch and notice the changes about filter
+   *
+   *  @source https://github.com/strongloop/loopback-next/issues/5132#issuecomment-658908843
+   */
+  patchPersistedModel();
+
   await app.boot();
   await app.start();
 

@@ -1,34 +1,69 @@
-<mat-sidenav-container class="example-container">
+<mat-sidenav-container class="example-container" *ngIf="model; else loading">
   <mat-sidenav opened mode="side" position="end" class="sidenav-details">
-    <div>{{ model$ | async | json }}</div>
+    <ng-container *ngIf="model.player">
+      <h2>Hráč: {{ model.player.surname }} {{ model.player.firstName }}</h2>
+      <ul *ngIf="model.player.xQuality">
+        <li *ngFor="let xQuality of model.player.xQuality">
+          {{ xQuality.quality.name }}: {{ xQuality.rate }}
+        </li>
+      </ul>
+    </ng-container>
+    <i *ngIf="!model.player">nemá hráče</i>
+
+    <ng-container *ngIf="model.involvements">
+      <h2>Příběhové linky</h2>
+      <ul>
+        <li *ngFor="let involvement of model.involvements">
+          {{ involvement.tail.name }}
+        </li>
+      </ul>
+    </ng-container>
+
+    <ng-container *ngIf="model.acquaintances">
+      <h2>Ví o:</h2>
+      <ul>
+        <li *ngFor="let acquaintance of model.acquaintances">
+          <app-acquaintance-detail
+            [id]="acquaintance.id"
+          ></app-acquaintance-detail>
+        </li>
+      </ul>
+    </ng-container>
+
+    <ng-container *ngIf="model.acquaintancesAsObject">
+      <h2>Ví o něm:</h2>
+      <ul>
+        <li *ngFor="let acquaintance of model.acquaintancesAsObject">
+          <app-acquaintance-detail
+            [id]="acquaintance.id"
+            [isObject]="true"
+          ></app-acquaintance-detail>
+        </li>
+      </ul>
+    </ng-container>
+
+
+    <pre>{{ model | json }}</pre>
+
   </mat-sidenav>
   <mat-sidenav-content>
-    <form
-      *ngIf="model$ | async; else loading"
-      [formGroup]="form"
-      novalidate
-      (ngSubmit)="onSubmit()"
-    >
-      <mat-card class="shipping-card">
+    <form [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
+      <mat-card class="card-form">
         <mat-card-header>
           <mat-card-title>Role</mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <div class="row">
             <div class="col">
-              <mat-form-field class="full-width">
-                <input
-                  matInput
-                  placeholder="název postavy"
-                  formControlName="name"
-                />
+              <mat-form-field appearance="fill" class="full-width">
+                <input matInput placeholder="název" formControlName="name" />
                 <mat-error *ngIf="form.controls['name'].hasError('required')">
                   Toto pole je <strong>povinné</strong>
                 </mat-error>
               </mat-form-field>
             </div>
             <div class="col">
-              <mat-form-field class="full-width">
+              <mat-form-field appearance="fill" class="full-width">
                 <input
                   matInput
                   placeholder="popis na web (stručný)"
@@ -44,7 +79,7 @@
           </div>
           <div class="row">
             <div class="col">
-              <mat-form-field class="full-width">
+              <mat-form-field appearance="fill" class="full-width">
                 <textarea
                   matInput
                   placeholder="popis na web (úplný)"
@@ -60,10 +95,10 @@
           </div>
           <div class="row">
             <div class="col">
-              <mat-form-field class="full-width">
+              <mat-form-field appearance="fill" class="full-width">
                 <textarea
                   matInput
-                  placeholder="popis role"
+                  placeholder="popis"
                   formControlName="description"
                 ></textarea>
                 <mat-error
@@ -76,7 +111,7 @@
           </div>
           <div class="row">
             <div class="col">
-              <mat-form-field class="full-width">
+              <mat-form-field appearance="fill" class="full-width">
                 <textarea
                   matInput
                   placeholder="pískoviště"
@@ -92,7 +127,7 @@
           </div>
           <div class="row">
             <div class="col">
-              <mat-form-field class="full-width">
+              <mat-form-field appearance="fill" class="full-width">
                 <textarea
                   matInput
                   placeholder="organizačně"
@@ -108,7 +143,7 @@
           </div>
           <div class="row">
             <div class="col">
-              <mat-form-field class="full-width">
+              <mat-form-field appearance="fill" class="full-width">
                 <textarea
                   matInput
                   placeholder="vybavení"
@@ -124,15 +159,20 @@
           </div>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="!form.valid"
+          >
             Uložit
           </button>
         </mat-card-actions>
       </mat-card>
     </form>
-
-    <ng-template #loading>
-      Načítám data...
-    </ng-template>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+<ng-template #loading>
+  Načítám data...
+</ng-template>

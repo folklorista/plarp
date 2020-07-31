@@ -1,5 +1,5 @@
 export * from './acquaintance.repository';
-export * from './acquintance-x-task.repository';
+export * from './acquaintance-x-task.repository';
 export * from './character-x-prop.repository';
 export * from './character-x-task.repository';
 export * from './character.repository';
