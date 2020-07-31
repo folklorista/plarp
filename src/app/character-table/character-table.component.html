@@ -20,7 +20,7 @@
   class="characters-table mat-elevation-z8"
   [dataSource]="dataSource"
   matSort
-  matSortActive="name"
+  matSortActive="sorting"
   matSortDirection="asc"
   matSortDisableClear
 >
@@ -35,6 +35,11 @@
         <mat-icon>open_in_new</mat-icon>
       </button>
     </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="sorting">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>řadící klíč</mat-header-cell>
+    <mat-cell *matCellDef="let character">{{ character.sorting }}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="name">

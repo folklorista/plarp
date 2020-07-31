@@ -13,6 +13,7 @@ export abstract class BaseFormComponent<T extends Base> implements OnInit {
   id$: Observable<number>;
   relations: string[] = [];
   model: T;
+  sortColumn = 'id';
   constructor(
     protected fb: FormBuilder,
     protected modelService: BaseService<T>,
@@ -32,7 +33,15 @@ export abstract class BaseFormComponent<T extends Base> implements OnInit {
         switchMap((id: number) =>
           id
             ? this.modelService
-                .find(id.toString(), ['id'], null, null, null, this.relations)
+                .find(
+                  id.toString(),
+                  ['id'],
+                  this.sortColumn,
+                  'asc',
+                  null,
+                  null,
+                  this.relations
+                )
                 .pipe(tap((row) => this.form.patchValue(row)))
             : of(emptyModel)
         )

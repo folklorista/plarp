@@ -15,6 +15,7 @@ export abstract class BaseTableComponent<T extends Base>
   @ViewChild(MatSort, { static: false }) sort: MatSort;
   @ViewChild('input', { static: false }) input: ElementRef;
   dataSource: BaseDataSource<T>;
+  sortColumn = 'id';
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   abstract displayedColumns: string[];
@@ -31,6 +32,7 @@ export abstract class BaseTableComponent<T extends Base>
     this.dataSource.loadData(
       '',
       this.searchedColumns,
+      this.sortColumn,
       'asc',
       0,
       10,
@@ -39,7 +41,9 @@ export abstract class BaseTableComponent<T extends Base>
   }
 
   ngAfterViewInit() {
-    this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
+    this.sort.sortChange.subscribe((e) => {
+      this.paginator.pageIndex = 0;
+    });
 
     fromEvent(this.input.nativeElement, 'keyup')
       .pipe(
@@ -62,6 +66,7 @@ export abstract class BaseTableComponent<T extends Base>
     this.dataSource.loadData(
       this.input.nativeElement.value,
       this.searchedColumns,
+      this.sort.active,
       this.sort.direction,
       this.paginator.pageIndex,
       this.paginator.pageSize,

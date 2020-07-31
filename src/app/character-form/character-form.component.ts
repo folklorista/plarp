@@ -15,6 +15,7 @@ import { CharacterService } from '@/services/character.service';
 export class CharacterFormComponent extends BaseFormComponent<Character>
   implements OnInit {
   form = this.fb.group({
+    sorting: '',
     name: [null, Validators.required],
     summaryShort: '',
     summaryLong: '',

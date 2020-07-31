@@ -1,11 +1,11 @@
-import {belongsTo, hasMany, model, property, hasOne} from '@loopback/repository';
+import {belongsTo, hasMany, hasOne, model, property} from '@loopback/repository';
 
+import {Acquaintance} from './acquaintance.model';
 import {BaseModel} from './base.model';
 import {CharacterXProp} from './character-x-prop.model';
-import {User} from './user.model';
-import {Player} from './player.model';
-import {Acquaintance} from './acquaintance.model';
 import {Involvement} from './involvement.model';
+import {Player} from './player.model';
+import {User} from './user.model';
 
 @model({
   settings: {
@@ -29,6 +29,21 @@ export class Character extends BaseModel {
     },
   })
   id: number;
+
+  @property({
+    type: 'string',
+    required: false,
+    length: 32,
+    postgresql: {
+      columnName: 'sorting',
+      dataType: 'character varying',
+      dataLength: 32,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  sorting: string;
 
   @property({
     type: 'string',

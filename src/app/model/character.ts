@@ -5,6 +5,7 @@ import { Player } from './player';
 import { User } from './user';
 
 export interface Character extends BaseExtended {
+  sorting?: string;
   name?: string;
   summaryShort?: string;
   summaryLong?: string;

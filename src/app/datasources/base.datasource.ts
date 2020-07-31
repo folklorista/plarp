@@ -20,6 +20,7 @@ export abstract class BaseDataSource<T extends Base> implements DataSource<T> {
   loadData(
     searchedString: string,
     searchedColumns: string[],
+    sortColumn: string,
     sortDirection: string,
     pageIndex: number,
     pageSize: number,
@@ -33,6 +34,7 @@ export abstract class BaseDataSource<T extends Base> implements DataSource<T> {
       .find(
         searchedString,
         searchedColumns,
+        sortColumn,
         sortDirection,
         pageIndex,
         pageSize,

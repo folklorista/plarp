@@ -16,7 +16,7 @@ export class CharacterTableComponent extends BaseTableComponent<Character>
   dataSource: CharactersDataSource;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['_actions', 'name', 'summaryShort'];
+  displayedColumns = ['_actions', 'sorting', 'name', 'summaryShort'];
   searchedColumns = ['name', 'summaryShort'];
   routeUrl = 'character';
 

@@ -41,10 +41,6 @@
         </li>
       </ul>
     </ng-container>
-
-
-    <pre>{{ model | json }}</pre>
-
   </mat-sidenav>
   <mat-sidenav-content>
     <form [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
@@ -62,6 +58,22 @@
                 </mat-error>
               </mat-form-field>
             </div>
+            <div class="col">
+              <mat-form-field appearance="fill" class="full-width">
+                <input
+                  matInput
+                  placeholder="řadící klíč"
+                  formControlName="sorting"
+                />
+                <mat-error
+                  *ngIf="form.controls['sorting'].hasError('required')"
+                >
+                  Toto pole je <strong>povinné</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
             <div class="col">
               <mat-form-field appearance="fill" class="full-width">
                 <input

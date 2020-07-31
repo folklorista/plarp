@@ -19,7 +19,7 @@ export interface Filter {
   offset?: number;
   limit?: number;
   skip?: number;
-  order?: string[];
+  order?: string;
   where?: object;
   fields?: object;
   include?: Inclusion[];
@@ -46,6 +46,7 @@ export abstract class BaseService<T extends Base> {
   find(
     searchedString?: string,
     searchedColumns?: string[],
+    sortColumn?: string,
     sortDirection = 'asc',
     pageNumber = 0,
     pageSize = 10,
@@ -54,12 +55,11 @@ export abstract class BaseService<T extends Base> {
     const rels = relations ? relations : this.relations;
     const filter: Filter = {
       where: this.buildWhere(searchedString, searchedColumns),
-      order: this.buildOrder(sortDirection),
+      order: this.buildOrder(sortColumn, sortDirection),
       offset: pageNumber * pageSize,
       limit: pageSize,
       include: this.buildIncludeFilter(rels),
     };
-
     const params = new HttpParams().set('filter', JSON.stringify(filter));
 
     return this.http.get<T[]>(`${this.apiUrl}/${this.apiUrlModel}`, {
@@ -114,9 +114,11 @@ export abstract class BaseService<T extends Base> {
     return result;
   }
 
-  private buildOrder(sortDirection: string): string[] {
-    // TODO: sort column with direction
-    return null;
+  private buildOrder(
+    sortColumn: string = 'id',
+    sortDirection: string = 'asc'
+  ): string {
+    return sortColumn + ' ' + sortDirection;
   }
 
   private buildIncludeFilter(rels: string[]): Inclusion[] {
